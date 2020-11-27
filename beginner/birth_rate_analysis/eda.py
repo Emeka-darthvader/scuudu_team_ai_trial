@@ -25,10 +25,10 @@ plt.show()
 #remove outliers
 quartiles = np.percentile(births['births'], [25, 50, 75])
 mean = quartiles[1]
-sigma = 0.74 * (quartiles[2] - quartiles[0])
+sigmaB = 0.74 * (quartiles[2] - quartiles[0])
 
 #using query to filter out the values
-births = births.query('(births &gt; @mean - 5 * @sigma) &amp; (births &lt; @mean + 5 * @sigma)') 
+births = births.query('(births > @mean - 5 * @sigmaB) & (births < @mean + 5 * @sigmaB)') 
 births.index = pd.to_datetime(10000 * births.year + 100 * births.month + births.day, format='%Y%m%d') 
 births['day of week'] = births.index.dayofweek
 
